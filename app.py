@@ -1,11 +1,18 @@
 from flask import Flask
+from models.base_model import db
 from routes.index import main as index_routes  # 这里我们从 routes 文件夹下的 index 引入 main, 并把它重命名为 index_routes，这样在注册的时候更直观
-
 
 def configured_app():
     # 初始化 flask
     # 注册路由
     app = Flask(__name__)
+
+    uri = 'mysql+pymysql://{}:{}@localhost/{}?charset=utf8mb4'.format(
+        "root", "password", "db_name"
+    )
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 如果好奇 SQLAlchemy 具体执行了哪些语句，可以把 False 设为 True，就会在控制台输出具体语句了。
+    db.init_app(app)
     register_routes(app)
     return app
 
