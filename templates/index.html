@@ -2,7 +2,7 @@
 <H1>Hello, World!</H1>
 <h2>This is my blog.</h2>
 {% for article in articles %}
-<li><a>{{ article.title }}, {{article.create_time}}, {{article.preview}}</a></li>
+<li><a>{{ article.title }}, {{article.created_time}}, {{article.content}}</a></li>
 {% endfor %}
 {{ message }}
 </HTML>

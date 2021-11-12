@@ -7,8 +7,8 @@ def configured_app():
     # 注册路由
     app = Flask(__name__)
 
-    uri = 'mysql+pymysql://{}:{}@localhost/{}?charset=utf8mb4'.format(
-        "root", "password", "db_name"
+    uri = 'mysql+pymysql://{}:{}@localhost:3307/{}?charset=utf8mb4'.format(
+        "root", "123456", "blog"
     )
     app.config['SQLALCHEMY_DATABASE_URI'] = uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 如果好奇 SQLAlchemy 具体执行了哪些语句，可以把 False 设为 True，就会在控制台输出具体语句了。
