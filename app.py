@@ -1,7 +1,7 @@
 from flask import Flask
 from models.base_model import db
 from routes.index import main as index_routes  # 这里我们从 routes 文件夹下的 index 引入 main, 并把它重命名为 index_routes，这样在注册的时候更直观
-
+from routes.article import main as article_routes
 def configured_app():
     # 初始化 flask
     # 注册路由
@@ -20,6 +20,7 @@ def configured_app():
 def register_routes(app):
     # 注册路由
     app.register_blueprint(index_routes)
+    app.register_blueprint(article_routes, url_prefix="/article")
 
 
 if __name__ == '__main__':

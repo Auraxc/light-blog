@@ -21,9 +21,11 @@ def reset_database():
 
 
 def generate_fake_date():
+    with open('markdown_demo.md', encoding='utf8') as f:
+        content = f.read()
     form1 = dict(
-        title='第一篇文章',
-        content='第一篇文章正文',
+        title='Markdown Demo',
+        content=content,
         user_id=0,
     )
     Article.new(form1)
