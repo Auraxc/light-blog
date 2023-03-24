@@ -1,6 +1,7 @@
-<HTML>
+<HTML lang="">
 <H1>Hello, World!</H1>
 <h2>This is my blog.</h2>
+<h3><a href="/about_me">About me</a></h3>
 {% for article in articles %}
     <li><a href="/article/{{ article.id }}">{{ article.title }}</a>
         <a>{{ article.created_time | format_time }}</a>

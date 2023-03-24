@@ -11,4 +11,11 @@ class Article(SQLMixin, db.Model):
     content = Column(UnicodeText, nullable=False)  # 文章内容
     user_id = Column(Integer, nullable=False)  # 用户 id
     category_id = Column(Integer, nullable=False, default=0)  # 文章分类 id
-    tag = Column(VARCHAR(64), nullable=False, default='default') # 文章 tag
+    tag = Column(VARCHAR(64), nullable=False, default='default')  # 文章 tag
+
+    @classmethod
+    def get(cls, id):
+        m = cls.one(id=id)
+        m.views += 1
+        m.save()
+        return m
