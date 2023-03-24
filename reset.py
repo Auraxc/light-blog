@@ -7,15 +7,13 @@ from models.article import Article
 
 def reset_database():
     # 现在 mysql root 默认用 socket 来验证而不是密码
-    uri = 'mysql+pymysql://root:{}@127.0.0.1:3307/?charset=utf8mb4'.format(
-        '123456'
-    )
+    uri = 'sqlite:///mydb.db'
     e = create_engine(uri, echo=True)
 
-    with e.connect() as c:
-        c.execute('DROP DATABASE IF EXISTS blog')
-        c.execute('CREATE DATABASE blog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci')
-        c.execute('USE blog')
+    # with e.connect() as c:
+        # c.execute('DROP DATABASE IF EXISTS blog')
+        # c.execute('CREATE DATABASE blog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci')
+        # c.execute('USE blog')
 
     db.metadata.create_all(bind=e)
 

@@ -1,15 +1,28 @@
+import time
+
 from flask import Flask
 from models.base_model import db
 from routes.index import main as index_routes  # 这里我们从 routes 文件夹下的 index 引入 main, 并把它重命名为 index_routes，这样在注册的时候更直观
 from routes.article import main as article_routes
+
+
+def format_time(unix_timestamp):
+    # enum Year():
+    #     2013
+    #     13
+    # f = Year.2013
+    f = '%Y-%m-%d'
+    value = time.localtime(unix_timestamp)
+    formatted = time.strftime(f, value)
+    return formatted
+
+
 def configured_app():
     # 初始化 flask
     # 注册路由
     app = Flask(__name__)
 
-    uri = 'mysql+pymysql://{}:{}@localhost:3307/{}?charset=utf8mb4'.format(
-        "root", "123456", "blog"
-    )
+    uri = 'sqlite:///mydb.db'
     app.config['SQLALCHEMY_DATABASE_URI'] = uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 如果好奇 SQLAlchemy 具体执行了哪些语句，可以把 False 设为 True，就会在控制台输出具体语句了。
     db.init_app(app)
@@ -21,6 +34,8 @@ def register_routes(app):
     # 注册路由
     app.register_blueprint(index_routes)
     app.register_blueprint(article_routes, url_prefix="/article")
+
+    app.template_filter()(format_time)
 
 
 if __name__ == '__main__':

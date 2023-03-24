@@ -1,7 +1,7 @@
 import time
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer
 
 db = SQLAlchemy()
 
